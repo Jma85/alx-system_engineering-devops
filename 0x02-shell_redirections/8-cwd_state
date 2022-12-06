@@ -1,2 +1,2 @@
 #1/bin/bash
-ls -la > ls_cwd-content
+ls -1a > 1s_cwd-content
