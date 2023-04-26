@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # loops from 1 to 10 using while loop and displays bad luck for the 4th loop iteration, goodluck for the 8th loop iteration and Best School for the other iterations.
 counter=0
 while [ $counter -lt 10 ]; do
