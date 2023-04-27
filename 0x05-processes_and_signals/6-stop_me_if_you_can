@@ -2,4 +2,4 @@
 #stops 4-to_infinity_and_beyond
 #without using the kill comand
 
-pkill -f 7-highlander
+pkill -f 4-to_infinity_and_beyond
