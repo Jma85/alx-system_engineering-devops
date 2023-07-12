@@ -35,18 +35,22 @@ defaults
 
 
 
-# start of parameters for jma85.tech
-frontend jma85.tech-http-frontend
-        bind     *:80
-        redirect scheme https code 301 if !{ ssl_fc }
-        http-request set-header X-Forwarded-Proto http
-        default_backend  jma85.tech-backend
-frontend b3zaleel-alx.tech-https-frontend
-        bind *:443 ssl crt /etc/letsencrypt/live/www.nwabueze.tech/fullchain.pem
-        http-request set-header X-Forwarded-Proto https
-        default_backend jma85.tech-backend
-backend jma85.tech-backend
-        balance roundrobin
-        server 100.26.136.37 54.146.15.57:80 check
+# start of parameters for me
+frontend www-https
+        bind *:80
+        bind *:443 ssl crt /etc/haproxy/certs/www.jma85.tech.pem
+        redirect scheme https if !{ ssl_fc }
+        acl    letsencrypt-acl path_beg /.well-known/acme-challenge/
+        use_backend letsencrypt-backend if letsencrypt-acl
+        mode http
+        default_backend www-backend
+
+backend www-backend
+        balance  roundrobin
+        redirect scheme https if !{ ssl_fc }
+        server 201406-web-01 54.146.15.57:80 check
         server 201406-web-02 100.26.136.37:80 check
+
+backend letsencrypt-backend
+        server letsencrypt 127.0.0.1:54321
 # end of parameters
